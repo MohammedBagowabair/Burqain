@@ -111,7 +111,7 @@
                 "?subject=" + encodeURIComponent("رسالة من موقع برقان العقارية — " + name) +
                 "&body=" + encodeURIComponent(body);
             showStatus("سيتم فتح تطبيق البريد لإرسال رسالتك.");
-            window.location.href = mailto;
+            window.location.assign(mailto);
             return;
         }
 

@@ -147,6 +147,10 @@ a:hover {
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+.site-header.is-scrolled {
+    box-shadow: 0 10px 28px rgba(2, 22, 38, 0.28);
+}
+
 .header-inner {
     width: min(72rem, calc(100% - 1.25rem));
     height: 100%;
@@ -174,20 +178,16 @@ a:hover {
 .brand-mark {
     display: grid;
     place-items: center;
-    width: 2.75rem;
-    height: 2.75rem;
-    border-radius: 10px;
-    background: #000;
+    width: 2.85rem;
+    height: 2.85rem;
     overflow: hidden;
     flex-shrink: 0;
 }
 
 .brand-mark img {
-    width: 2.7rem;
-    height: 2.5rem;
-    object-fit: cover;
-    object-position: center;
-    transform: scale(1.18);
+    width: 3.35rem;
+    height: 3.1rem;
+    object-fit: contain;
 }
 
 .brand-text {
@@ -332,8 +332,7 @@ a:hover {
     inset: 0;
     z-index: -1;
     background:
-        linear-gradient(180deg, rgba(2, 22, 38, 0.28) 0%, rgba(2, 22, 38, 0.55) 42%, rgba(2, 22, 38, 0.88) 100%),
-        linear-gradient(90deg, rgba(0, 59, 102, 0.35), transparent 55%);
+        linear-gradient(180deg, rgba(2, 22, 38, 0.18) 0%, rgba(2, 22, 38, 0.42) 38%, rgba(2, 22, 38, 0.82) 100%);
 }
 
 .hero-inner {
@@ -354,22 +353,18 @@ a:hover {
 }
 
 .hero-logo {
-    width: 5.5rem;
-    height: 5.5rem;
-    margin: 0 auto 1rem;
-    border-radius: 18px;
-    background: #000;
+    width: 6.25rem;
+    height: 5.75rem;
+    margin: 0 auto 0.85rem;
     display: grid;
     place-items: center;
-    overflow: hidden;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
 }
 
 .hero-logo img {
-    width: 5.4rem;
-    height: 5rem;
-    object-fit: cover;
-    transform: scale(1.2);
+    width: 6.25rem;
+    height: 5.75rem;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.35));
 }
 
 .hero h1 {
@@ -395,8 +390,17 @@ a:hover {
 }
 
 .hero-actions .btn {
-    flex: 1 1 10.5rem;
-    max-width: 18rem;
+    flex: 1 1 100%;
+}
+
+.hero .btn-primary {
+    background: var(--white);
+    color: var(--navy);
+}
+
+.hero .btn-primary:hover {
+    background: var(--paper);
+    color: var(--navy);
 }
 
 /* Sections */
@@ -439,9 +443,11 @@ a:hover {
 }
 
 .about-lead {
-    margin: 0 0 1.75rem;
+    margin: 0 auto 1.75rem;
+    max-width: 46rem;
     font-size: 1.15rem;
     color: var(--ink);
+    text-align: center;
     text-wrap: pretty;
 }
 
@@ -458,6 +464,14 @@ a:hover {
     border: 1px solid var(--line);
     border-radius: var(--radius);
     padding: 1.35rem 1.2rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.service-card:hover,
+.value-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+    border-color: rgba(62, 176, 77, 0.35);
 }
 
 .value-icon {
@@ -507,6 +521,7 @@ a:hover {
     border-radius: var(--radius);
     padding: 1.6rem 1.3rem;
     box-shadow: var(--shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .service-icon {
@@ -630,6 +645,24 @@ a:hover {
 .contact-list a {
     text-decoration: none;
     font-weight: 700;
+}
+
+.phone-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.1rem;
+}
+
+.phone-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    white-space: nowrap;
+}
+
+.phone-links .sep {
+    display: none;
 }
 
 .sep {
@@ -792,6 +825,11 @@ body.nav-open {
         grid-template-columns: 1fr 1fr;
     }
 
+    .hero-actions .btn {
+        flex: 1 1 10.5rem;
+        max-width: 16.5rem;
+    }
+
     .map-frame {
         height: 22rem;
         min-height: 22rem;
@@ -837,21 +875,12 @@ body.nav-open {
         padding-inline: 1.1rem;
     }
 
-    .about-grid {
-        display: grid;
-        grid-template-columns: 1.1fr 1fr;
-        gap: 2.5rem;
-        align-items: start;
-    }
-
     .about-lead {
-        margin: 0;
         font-size: 1.25rem;
-        padding-top: 0.4rem;
     }
 
     .value-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .service-grid,
@@ -874,6 +903,20 @@ body.nav-open {
         grid-template-columns: 1fr 1fr;
     }
 
+    .phone-links {
+        flex-direction: row;
+        align-items: center;
+        gap: 0.45rem;
+    }
+
+    .phone-links a {
+        min-height: 0;
+    }
+
+    .phone-links .sep {
+        display: inline;
+    }
+
     .footer-bottom {
         padding-bottom: 1.25rem;
     }
@@ -893,7 +936,14 @@ body.nav-open {
     .btn,
     .nav-toggle-bars,
     .nav-toggle-bars::before,
-    .nav-toggle-bars::after {
+    .nav-toggle-bars::after,
+    .service-card,
+    .value-card {
         transition: none;
+    }
+
+    .service-card:hover,
+    .value-card:hover {
+        transform: none;
     }
 }
