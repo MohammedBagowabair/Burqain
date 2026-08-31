@@ -519,9 +519,13 @@ a:hover {
 
 .contact-form label {
     display: block;
-    margin: 1.1rem 0 0.3rem;
+    margin: 1.35rem 0 0.35rem;
     color: var(--navy);
     font-weight: 500;
+}
+
+.contact-form label:nth-of-type(1) {
+    margin-top: 0.35rem;
 }
 
 .contact-form input,
@@ -653,7 +657,7 @@ body.nav-open {
 
     .split {
         grid-template-columns: 1fr 1fr;
-        gap: clamp(2.5rem, 4vw, 4rem);
+        gap: clamp(3rem, 5vw, 4.5rem);
     }
 
     .split-reverse .split-copy {
