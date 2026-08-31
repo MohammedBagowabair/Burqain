@@ -373,7 +373,7 @@ a:hover {
 
 .quiet-list li,
 .service-list li {
-    padding: 1.35rem 0;
+    padding: 1.5rem 0;
     border-top: 1px solid var(--line);
 }
 
@@ -503,10 +503,11 @@ a:hover {
 }
 
 .form-heading {
-    margin: 0 0 0.65rem;
+    margin: 0 0 0.85rem;
     color: var(--navy);
-    font-size: 1.15rem;
+    font-size: clamp(1.35rem, 2.4vw, 1.85rem);
     font-weight: 500;
+    line-height: 1.4;
 }
 
 .form-note {
@@ -603,6 +604,19 @@ a:hover {
     color: var(--gold);
 }
 
+.footer-contact {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.15rem 0.15rem;
+    margin: 0;
+}
+
+.footer-contact a,
+.footer-contact span {
+    flex: 0 1 auto;
+}
+
 .footer-copy {
     margin: 2rem 0 0;
     padding-top: 1.25rem;
@@ -648,16 +662,20 @@ body.nav-open {
 
     .split-media,
     .map-frame {
-        display: grid;
+        position: relative;
+        display: block;
         min-height: 22rem;
-        height: auto;
         align-self: stretch;
     }
 
     .split-media img,
     .map-frame iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
         height: 100%;
-        min-height: 22rem;
+        min-height: 0;
+        max-width: none;
         object-fit: cover;
     }
 
