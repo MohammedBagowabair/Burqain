@@ -10,6 +10,10 @@
     --line: rgba(11, 31, 58, 0.12);
     --header-h: 4.25rem;
     --space: clamp(1.25rem, 4vw, 3.5rem);
+    --gutter: 1rem;
+    --content: 72rem;
+    --section-y: clamp(3.25rem, 7vw, 5.5rem);
+    --split-gap: clamp(1.75rem, 4.5vw, 3.5rem);
 }
 
 *,
@@ -34,8 +38,12 @@ body {
     text-align: start;
 }
 
-img {
+img,
+iframe {
     max-width: 100%;
+}
+
+img {
     height: auto;
     display: block;
 }
@@ -290,35 +298,43 @@ a:hover {
     border-color: var(--line);
 }
 
-/* Editorial splits */
+/* Below-hero page shell — do not reuse --space here (hero padding). */
+.section {
+    padding-block: var(--section-y);
+}
+
+.section-shell {
+    width: min(var(--content), calc(100% - (2 * var(--gutter))));
+    margin-inline: auto;
+}
+
 .split {
     display: grid;
+    gap: var(--split-gap);
+    align-items: stretch;
 }
 
 .split-media,
 .map-frame {
-    min-height: 18rem;
+    margin: 0;
     background: #e8e2d6;
+    overflow: hidden;
 }
 
 .split-media img,
 .map-frame iframe {
     width: 100%;
-    height: 100%;
-    min-height: 18rem;
+    height: clamp(16rem, 58vw, 22rem);
     object-fit: cover;
+    display: block;
     border: 0;
 }
 
-.map-frame {
-    min-height: 20rem;
-}
-
 .split-copy {
-    padding: clamp(2.5rem, 6vw, 5.5rem) var(--space);
     display: flex;
     flex-direction: column;
     justify-content: center;
+    min-width: 0;
 }
 
 .eyebrow {
@@ -338,7 +354,7 @@ a:hover {
 }
 
 .lede {
-    margin: 0 0 2rem;
+    margin: 0 0 2.25rem;
     color: var(--ink);
     max-width: 36rem;
 }
@@ -350,21 +366,26 @@ a:hover {
     padding: 0;
 }
 
+.display + .quiet-list,
+.display + .service-list {
+    margin-top: 0.35rem;
+}
+
 .quiet-list li,
 .service-list li {
-    padding: 1rem 0;
-    border-top: 1px solid var(--gold-soft);
+    padding: 1.35rem 0;
+    border-top: 1px solid var(--line);
 }
 
 .service-list li:last-child,
 .quiet-list li:last-child {
-    border-bottom: 1px solid var(--gold-soft);
+    border-bottom: 1px solid var(--line);
 }
 
 .quiet-list strong,
 .service-list h3 {
     display: block;
-    margin: 0 0 0.2rem;
+    margin: 0 0 0.45rem;
     color: var(--navy);
     font-size: 1.05rem;
     font-weight: 500;
@@ -374,11 +395,13 @@ a:hover {
 .service-list p {
     margin: 0;
     color: var(--muted);
+    line-height: 1.85;
 }
 
 .hours {
-    margin: 0 0 1.5rem;
+    margin: 0 0 1.75rem;
     color: var(--muted);
+    line-height: 1.85;
 }
 
 .text-link {
@@ -396,83 +419,106 @@ a:hover {
     color: var(--gold);
 }
 
-.full-bleed {
+.interior-band {
     margin: 0;
+    padding-block: var(--section-y);
 }
 
-.full-bleed img {
+.interior-band-inner {
+    width: min(var(--content), calc(100% - (2 * var(--gutter))));
+    margin-inline: auto;
+}
+
+.interior-band img {
     width: 100%;
-    height: min(70vh, 38rem);
+    height: clamp(16rem, 48vw, 30rem);
     object-fit: cover;
 }
 
+.interior-band figcaption {
+    margin: 1.1rem 0 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
 /* Contact */
-.contact {
-    padding: clamp(3.5rem, 8vw, 7rem) var(--space);
+.contact-grid {
     display: grid;
-    gap: clamp(2.5rem, 5vw, 4rem);
-    border-top: 1px solid var(--gold-soft);
+    gap: clamp(2.75rem, 5vw, 4.5rem);
+    align-items: start;
 }
 
-.contact-facts {
-    display: grid;
-    gap: 1.75rem;
+.contact-details .lede {
+    margin-bottom: 1.75rem;
 }
 
-.fact-label {
-    margin: 0 0 0.35rem;
+.contact-channels {
+    list-style: none;
+    margin: 0 0 2rem;
+    padding: 0;
+    display: grid;
+    gap: 1.5rem;
+}
+
+.contact-channels li {
+    display: grid;
+    gap: 0.2rem;
+    min-width: 0;
+}
+
+.channel-label {
     color: var(--gold);
     font-size: 0.78rem;
     letter-spacing: 0.1em;
 }
 
-.contact-facts p {
-    margin: 0;
-}
-
-.contact-facts a {
+.contact-channels a {
     text-decoration: none;
     font-weight: 500;
-}
-
-.phone-links {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.15rem;
-}
-
-.phone-links a {
     min-height: 44px;
     display: inline-flex;
     align-items: center;
+    width: fit-content;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+}
+
+.contact-channels a[dir="ltr"] {
+    overflow-wrap: normal;
     white-space: nowrap;
 }
 
-.wa-alt {
-    margin-top: 0.35rem;
+.contact-channels span:not(.channel-label) {
+    color: var(--ink);
+    line-height: 1.85;
 }
 
-.wa-alt a {
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-    border-bottom: 1px solid var(--gold);
+.contact-whatsapp {
+    width: fit-content;
 }
 
 .contact-form {
-    max-width: 32rem;
+    min-width: 0;
+}
+
+.form-heading {
+    margin: 0 0 0.65rem;
+    color: var(--navy);
+    font-size: 1.15rem;
+    font-weight: 500;
 }
 
 .form-note {
-    margin: 0 0 1.25rem;
+    margin: 0 0 1.5rem;
     color: var(--muted);
     font-size: 0.95rem;
+    line-height: 1.8;
 }
 
 .contact-form label {
     display: block;
-    margin: 0.9rem 0 0.3rem;
+    margin: 1.1rem 0 0.3rem;
     color: var(--navy);
     font-weight: 500;
 }
@@ -483,7 +529,7 @@ a:hover {
     min-height: 48px;
     padding: 0.7rem 0;
     border: 0;
-    border-bottom: 1px solid var(--gold-soft);
+    border-bottom: 1px solid var(--line);
     background: transparent;
     font: inherit;
     color: var(--ink);
@@ -505,7 +551,7 @@ a:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
-    margin-top: 1.5rem;
+    margin-top: 1.75rem;
 }
 
 .form-status {
@@ -521,12 +567,12 @@ a:hover {
 .site-footer {
     background: var(--navy);
     color: rgba(247, 244, 238, 0.78);
-    padding: 3.5rem var(--space) 2.5rem;
+    padding-block: var(--section-y) 2.5rem;
     border-top: 1px solid var(--gold-soft);
 }
 
 .footer-inner {
-    width: min(72rem, 100%);
+    width: min(var(--content), calc(100% - (2 * var(--gutter))));
     margin-inline: auto;
 }
 
@@ -591,14 +637,9 @@ body.nav-open {
         min-height: 44px;
     }
 
-    .split,
-    .split-reverse {
-        grid-template-columns: 1.15fr 0.85fr;
-        min-height: 36rem;
-    }
-
-    .split-reverse {
-        grid-template-columns: 0.85fr 1.15fr;
+    .split {
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(2.5rem, 4vw, 4rem);
     }
 
     .split-reverse .split-copy {
@@ -606,26 +647,31 @@ body.nav-open {
     }
 
     .split-media,
-    .split-media img,
-    .map-frame,
-    .map-frame iframe {
-        min-height: 100%;
-        height: 100%;
+    .map-frame {
+        display: grid;
+        min-height: 22rem;
+        height: auto;
+        align-self: stretch;
     }
 
-    .contact {
+    .split-media img,
+    .map-frame iframe {
+        height: 100%;
+        min-height: 22rem;
+        object-fit: cover;
+    }
+
+    .contact-grid {
         grid-template-columns: 1fr 1fr;
+        gap: clamp(3rem, 5vw, 5.5rem);
         align-items: start;
     }
+}
 
-    .contact-form {
-        grid-column: 1 / -1;
-        max-width: 40rem;
-    }
-
-    .phone-links {
-        flex-direction: row;
-        gap: 1.25rem;
+@media (max-width: 479px) {
+    .form-actions {
+        flex-direction: column;
+        align-items: stretch;
     }
 }
 
